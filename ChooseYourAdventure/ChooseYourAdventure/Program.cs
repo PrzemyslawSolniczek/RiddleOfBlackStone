@@ -23,7 +23,7 @@ namespace ChooseYourAdventure
                 switch (key.Key)
                 {
                     case ConsoleKey.UpArrow:
-                        // Dodajemy 4, aby zapewnić, że wartość jest dodatnia
+                        // Dodajemy 4, aby zapewnic, ze wartosc jest dodatnia
                         userChoice = (userChoice - 1 + 4) % 4; 
                         break;
                     case ConsoleKey.DownArrow:
@@ -33,7 +33,7 @@ namespace ChooseYourAdventure
                         switch (userChoice)
                         {
                             case 0:
-//                                RozpocznijNowaGre();
+                                  NewGame();
                                 break;
                             case 1:
                                   About();
@@ -53,7 +53,7 @@ namespace ChooseYourAdventure
         static void ShowMenu(int userChoice)
         {
             Console.Clear();
-            //TUTAJ DODAĆ TEKST ASCII
+            //TUTAJ DODAC TEKST ASCII
             Console.WriteLine("Witaj w grze Choose Your Adventure!" + '\n');
 
             string[] options =
@@ -82,8 +82,8 @@ namespace ChooseYourAdventure
         
         static void NewGame()
         {
-            var gameControl = new GameController();
-            //gameControl.Start();
+            GameController gameControl = new GameController();
+            gameControl.StartGame();
         }
         
 

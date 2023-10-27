@@ -62,17 +62,52 @@ namespace ChooseYourAdventure.Controller
         // pobiera wybor gracza z konsoli
         private int GetPlayerChoice()
         {
-            int choice = -1;
+            int choiceIndex = 0;  // opcja wybrana w danym momencie
 
-            // petla wykonywana dopoki gracz nie poda prawidlowego wyboru
-            while (choice < 0 || choice >= currentScene.Choices.Count)
+            while (true)  // nieskonczona petla do momentu dokonania wyboru
             {
-                Console.Write("Wybierz opcję: ");
-                int.TryParse(Console.ReadLine(), out choice);
-                choice--; // odejmujemy 1, poniewaz lista wyborow zaczyna sie od indeksu 0
+                DisplayChoicesWithHighlight(choiceIndex);  // wyswietl dostepne wybory z podswietleniem
+
+                var key = Console.ReadKey(true);  // odczytaj wcisniety klawisz bez wyswietlania go na konsoli
+
+                switch (key.Key)
+                {
+                    case ConsoleKey.UpArrow:
+                        choiceIndex = (choiceIndex - 1 + currentScene.Choices.Count) % currentScene.Choices.Count;
+                        break;
+                    case ConsoleKey.DownArrow:
+                        choiceIndex = (choiceIndex + 1) % currentScene.Choices.Count;
+                        break;
+                    case ConsoleKey.Enter:
+                        return choiceIndex;  // wyswietl wybrany tekst
+                }
+            }
+        }
+
+        private void DisplayChoicesWithHighlight(int choiceIndex)
+        {
+            // wyswietl opis sceny i ASCII art (jesli istnieje)
+            Console.Clear();
+            Console.WriteLine(currentScene.Description);
+            if (!string.IsNullOrEmpty(currentScene.AsciiArt))
+            {
+                Console.WriteLine(currentScene.AsciiArt);
             }
 
-            return choice; // zwraca indeks wyboru
+            // wyswietl dostepne wybory z podswietleniem
+            for (int i = 0; i < currentScene.Choices.Count; i++)
+            {
+                if (i == choiceIndex)  // jezeli to aktualnie wybrana opcja
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine($">> {currentScene.Choices[i].Description}");
+                    Console.ResetColor();
+                }
+                else
+                {
+                    Console.WriteLine(currentScene.Choices[i].Description);
+                }
+            }
         }
     }
 }

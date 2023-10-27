@@ -1,0 +1,7 @@
+D:\Studia\Semestr V\KCK\Projekt\ChooseYourAdventure\ChooseYourAdventure\bin\Debug\ChooseYourAdventure.exe.config
+D:\Studia\Semestr V\KCK\Projekt\ChooseYourAdventure\ChooseYourAdventure\bin\Debug\ChooseYourAdventure.exe
+D:\Studia\Semestr V\KCK\Projekt\ChooseYourAdventure\ChooseYourAdventure\bin\Debug\ChooseYourAdventure.pdb
+D:\Studia\Semestr V\KCK\Projekt\ChooseYourAdventure\ChooseYourAdventure\obj\Debug\ChooseYourAdventure.csproj.AssemblyReference.cache
+D:\Studia\Semestr V\KCK\Projekt\ChooseYourAdventure\ChooseYourAdventure\obj\Debug\ChooseYourAdventure.csproj.CoreCompileInputs.cache
+D:\Studia\Semestr V\KCK\Projekt\ChooseYourAdventure\ChooseYourAdventure\obj\Debug\ChooseYourAdventure.exe
+D:\Studia\Semestr V\KCK\Projekt\ChooseYourAdventure\ChooseYourAdventure\obj\Debug\ChooseYourAdventure.pdb

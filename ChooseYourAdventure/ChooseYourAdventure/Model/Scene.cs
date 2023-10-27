@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ChooseYourAdventure.Model
+{
+    public class Scene
+    {
+        public string Description { get; set; } // opis sceny
+        public string AsciiArt { get; set; }    // grafika ASCII -> TODO
+        public List<Choice> Choices { get; set; } // dostepne wybory dla konkretnej sceny
+
+        public Scene()
+        {
+            Choices = new List<Choice>();
+        }
+    }
+}

@@ -11,6 +11,7 @@ namespace ChooseYourAdventure.Model
         public string Description { get; set; } // opis sceny
         public string AsciiArt { get; set; }    // grafika ASCII -> TODO
         public List<Choice> Choices { get; set; } // dostepne wybory dla konkretnej sceny
+        public ConsoleColor? SceneColor { get; set; } // bedzie ustawiany dla zakonczen
 
         public Scene()
         {

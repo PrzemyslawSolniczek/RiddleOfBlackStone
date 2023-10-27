@@ -14,13 +14,15 @@ namespace ChooseYourAdventure.Model
             Scene endingA = new Scene
             {
                 Description = "Zakończenie A: Okazuje się, że kamień był przeklęty. Przez Twoje decyzje świat pogrąża się w chaosie...",
-                Choices = new List<Choice>() // lista bedzie pusta
+                Choices = new List<Choice>(), // lista bedzie pusta
+                SceneColor = ConsoleColor.Red
             };
 
             Scene endingB = new Scene
             {
                 Description = "Zakończenie B: Dzięki Twoim badaniom i decyzjom, starożytna technologia przywraca równowagę...",
-                Choices = new List<Choice>() // lista bedzie pusta
+                Choices = new List<Choice>(), // lista bedzie pusta
+                SceneColor = ConsoleColor.Green
             };
 
             // tworzenie scen

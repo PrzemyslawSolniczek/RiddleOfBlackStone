@@ -44,7 +44,14 @@ namespace ChooseYourAdventure.Controller
         private void DisplayScene()
         {
             Console.Clear();
+
+            if (currentScene.SceneColor.HasValue)  // sprawdz, czy ustawiono kolor dla sceny
+            {
+                Console.ForegroundColor = currentScene.SceneColor.Value;
+            }
             Console.WriteLine(currentScene.Description); // wyswietla opis sceny
+
+            Console.ResetColor();  // resetuje kolor do domyslnego
 
             // jezeli scena posiada ASCII art, wyswietla go
             if (!string.IsNullOrEmpty(currentScene.AsciiArt))

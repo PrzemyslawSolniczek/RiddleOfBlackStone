@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ChooseYourAdventure.Controller
@@ -20,7 +21,7 @@ namespace ChooseYourAdventure.Controller
         // rozpoczyna gre od poczatkowej sceny
         public void StartGame()
         {
-
+            // ekran ladowania
             DisplayLoadingAnimation();
 
             // glowna petla gry wykonuje sie dopoki jest jakas scena do wyswietlenia
@@ -123,7 +124,7 @@ namespace ChooseYourAdventure.Controller
         private void DisplayLoadingAnimation()
         {
             Console.Clear();
-            Console.WriteLine("Ekran ładowania...\n");
+            Console.WriteLine("Gra jest ładowana...\n");
 
             string[] frames =
             {
@@ -137,19 +138,21 @@ namespace ChooseYourAdventure.Controller
             };
 
             int durationInSeconds = 10;
-            int delayInMillis = 500;  // Częstotliwość zmiany ramki animacji
+            int delayInMillis = 500;  // czestotliwosc zmiany animacji
 
             int totalIterations = (durationInSeconds * 1000) / delayInMillis;
 
             for (int i = 0; i < totalIterations; i++)
             {
-                Console.SetCursorPosition(0, 1);  // Resetuje kursor do początkowej pozycji
+                Console.SetCursorPosition(0, 1);  // resetuje kursor do początkowej pozycji
                 Console.Write(frames[i % frames.Length]);
                 System.Threading.Thread.Sleep(delayInMillis);
             }
 
             Console.SetCursorPosition(0, 4);
+            Console.Clear();
             Console.WriteLine("Ładowanie zakończone!");
+            Thread.Sleep(1000);
         }
     }
 }

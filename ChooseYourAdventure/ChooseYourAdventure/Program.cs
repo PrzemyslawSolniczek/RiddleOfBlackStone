@@ -56,6 +56,12 @@ namespace ChooseYourAdventure
             //TUTAJ DODAC TEKST ASCII
             Console.WriteLine("Witaj w grze Choose Your Adventure!" + '\n');
 
+            ShowStone();
+
+            const int menuWidth = 26;
+            Console.WriteLine($"╔{new string('═', menuWidth - 2)}╗");
+
+
             string[] options =
             {
                 "Rozpocznij nową grę",
@@ -66,17 +72,21 @@ namespace ChooseYourAdventure
 
             for (int i = 0; i < options.Length; i++)
             {
+                Console.Write("║ ");
+
                 if (i == userChoice)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine($">> {options[i]}");
+                    Console.WriteLine($">> {options[i].PadRight(menuWidth - 6)}║");
                     Console.ResetColor();
                 }
                 else
                 {
-                    Console.WriteLine(options[i]);
+                    Console.WriteLine($"   {options[i].PadRight(menuWidth - 6)}║");
                 }
             }
+            Console.WriteLine($"║{new string(' ', menuWidth - 2)}║");
+            Console.WriteLine($"╚{new string('═', menuWidth - 2)}╝");
         }
 
         
@@ -95,6 +105,26 @@ namespace ChooseYourAdventure
             Console.WriteLine("> Albert Stefanowski" + '\n');
             Console.WriteLine("Wciśnij dowolny klawisz, aby wrócić do menu...");
             Console.ReadKey();
+        }
+
+
+
+        ////// WZORKI ///////
+        static void ShowStone()
+        {
+            string[] stone =
+            {
+                "  .-=-. ",
+                " /  *  \\",
+                "( * | * )",
+                " \\  *  /",
+                "  `-=-' "
+            };
+
+            foreach (string line in stone)
+            {
+                Console.WriteLine(line);
+            }
         }
     }
 }

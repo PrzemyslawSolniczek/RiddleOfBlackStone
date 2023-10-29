@@ -20,6 +20,9 @@ namespace ChooseYourAdventure.Controller
         // rozpoczyna gre od poczatkowej sceny
         public void StartGame()
         {
+
+            DisplayLoadingAnimation();
+
             // glowna petla gry wykonuje sie dopoki jest jakas scena do wyswietlenia
             while (currentScene != null)
             {
@@ -115,6 +118,38 @@ namespace ChooseYourAdventure.Controller
                     Console.WriteLine(currentScene.Choices[i].Description);
                 }
             }
+        }
+
+        private void DisplayLoadingAnimation()
+        {
+            Console.Clear();
+            Console.WriteLine("Ekran ładowania...\n");
+
+            string[] frames =
+            {
+                "~    ~    ~\n" +
+                "  ~    ~    ~\n" +
+                "~    ~    ~",
+
+                "  ~    ~    ~\n" +
+                "~    ~    ~\n" +
+                "  ~    ~    ~"
+            };
+
+            int durationInSeconds = 10;
+            int delayInMillis = 500;  // Częstotliwość zmiany ramki animacji
+
+            int totalIterations = (durationInSeconds * 1000) / delayInMillis;
+
+            for (int i = 0; i < totalIterations; i++)
+            {
+                Console.SetCursorPosition(0, 1);  // Resetuje kursor do początkowej pozycji
+                Console.Write(frames[i % frames.Length]);
+                System.Threading.Thread.Sleep(delayInMillis);
+            }
+
+            Console.SetCursorPosition(0, 4);
+            Console.WriteLine("Ładowanie zakończone!");
         }
     }
 }

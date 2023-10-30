@@ -22,7 +22,7 @@ namespace ChooseYourAdventure.Controller
         public void StartGame()
         {
             // ekran ladowania
-            DisplayLoadingAnimation();
+   //         DisplayLoadingAnimation();
 
             // glowna petla gry wykonuje sie dopoki jest jakas scena do wyswietlenia
             while (currentScene != null)
@@ -53,7 +53,20 @@ namespace ChooseYourAdventure.Controller
             {
                 Console.ForegroundColor = currentScene.SceneColor.Value;
             }
-            Console.WriteLine(currentScene.Description); // wyswietla opis sceny
+
+            if (Program.DisplayTextLetterByLetter)
+            {
+                foreach (char l in currentScene.Description)
+                {
+                    Console.Write(l);
+                    Thread.Sleep(50); // czekaj 50ms między literami
+                }
+                Console.WriteLine(); // Nowa linia po wyświetleniu całego opisu
+            }
+            else
+            {
+                Console.WriteLine(currentScene.Description); // wyswietla opis sceny od razu
+            }
 
             Console.ResetColor();  // resetuje kolor do domyslnego
 

@@ -9,6 +9,9 @@ namespace ChooseYourAdventure
 {
     internal class Program
     {
+        // zmienna do ustawienia trybu wypisywania tekstu w scenach
+        public static bool DisplayTextLetterByLetter = true;
+
         static void Main(string[] args)
         {
             bool endOfGame = false;
@@ -139,15 +142,18 @@ namespace ChooseYourAdventure
             {
                 Console.Clear();
 
-                const int menuWidth = 26;
+                const int menuWidth = 31;
                 Console.WriteLine($"╔{new string('═', menuWidth - 2)}╗");
                 Console.WriteLine($"|{"Ustawienia".PadLeft((menuWidth + "Ustawienia".Length) / 2).PadRight(menuWidth - 2)}|"); // Wysrodkowany tytul
                 Console.WriteLine($"╠{new string('═', menuWidth - 2)}╣");
 
+
+                string displayMode = DisplayTextLetterByLetter ? "Wygląd: Litera po literze" : "Wygląd: Tekst od razu";
+
                 string[] options =
                 {
                     "Dźwięk: Włączony",
-                    "Wygląd: Klasyczny",
+                    displayMode,
                     "Powrót"
                 };
 
@@ -182,6 +188,10 @@ namespace ChooseYourAdventure
                         if (selectedOption == options.Length - 1) // jesli wybrano Powrot
                         {
                             return;
+                        }
+                        else if (selectedOption == 1) // wybrano tryb wyswietlania tekstu
+                        {
+                            DisplayTextLetterByLetter = !DisplayTextLetterByLetter;
                         }
                         break;
                 }

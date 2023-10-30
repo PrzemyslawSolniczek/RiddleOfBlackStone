@@ -23,8 +23,8 @@ namespace ChooseYourAdventure
                 switch (key.Key)
                 {
                     case ConsoleKey.UpArrow:
-                        // Dodajemy 4, aby zapewnic, ze wartosc jest dodatnia
-                        userChoice = (userChoice - 1 + 4) % 4; 
+                        // dodajemy 4, aby zapewnic, ze wartosc jest dodatnia
+                        userChoice = (userChoice - 1 + 4) % 4;
                         break;
                     case ConsoleKey.DownArrow:
                         userChoice = (userChoice + 1) % 4;
@@ -33,13 +33,13 @@ namespace ChooseYourAdventure
                         switch (userChoice)
                         {
                             case 0:
-                                  NewGame();
+                                NewGame();
                                 break;
                             case 1:
-                                  About();
+                                About();
                                 break;
                             case 2:
-                                // Opcje();
+                                OptionsPanel();
                                 break;
                             case 3:
                                 endOfGame = true;
@@ -54,12 +54,16 @@ namespace ChooseYourAdventure
         {
             Console.Clear();
             //TUTAJ DODAC TEKST ASCII
-            Console.WriteLine("Witaj w grze Choose Your Adventure!" + '\n');
 
+            Console.WriteLine("Riddle Of Black Stone");
+
+            //ShowTitle();
             ShowStone();
 
             const int menuWidth = 26;
             Console.WriteLine($"╔{new string('═', menuWidth - 2)}╗");
+            Console.WriteLine($"|{"Menu Główne".PadLeft((menuWidth + "Menu Główne".Length) / 2).PadRight(menuWidth - 2)}|");
+            Console.WriteLine($"╠{new string('═', menuWidth - 2)}╣");
 
 
             string[] options =
@@ -89,22 +93,99 @@ namespace ChooseYourAdventure
             Console.WriteLine($"╚{new string('═', menuWidth - 2)}╝");
         }
 
-        
+
         static void NewGame()
         {
             GameController gameControl = new GameController();
             gameControl.StartGame();
         }
-        
+
 
         static void About()
         {
             Console.Clear();
-            Console.WriteLine("Autorzy: " + '\n');
-            Console.WriteLine("> Przemysław Solniczek");
-            Console.WriteLine("> Albert Stefanowski" + '\n');
-            Console.WriteLine("Wciśnij dowolny klawisz, aby wrócić do menu...");
+
+            const int frameWidth = 25; // ustawiamy szerokosc ramki
+
+            Console.WriteLine($"+{new string('~', frameWidth - 2)}+");
+
+            // tytul
+            int paddingSize = (frameWidth - "Autorzy:".Length) / 2;
+            Console.WriteLine($"|{new string(' ', paddingSize)}Autorzy:{new string(' ', frameWidth - paddingSize - "Autorzy:".Length - 2)}|");
+            Console.WriteLine("|                       |");
+
+            // autorzy
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine($"| Przemysław Solniczek |");
+            Console.ResetColor();
+            Console.WriteLine($"+{new string('~', frameWidth - 2)}+");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine($"| Albert Stefanowski   |");
+            Console.ResetColor();
+            Console.WriteLine("|                       |");
+
+            Console.WriteLine($"+{new string('~', frameWidth - 2)}+");
+
+            Console.WriteLine("Naciśnij dowolny klasiwsz by wrócić");
+
             Console.ReadKey();
+        }
+
+        static void OptionsPanel()
+        {
+            int selectedOption = 0;
+
+            while (true)
+            {
+                Console.Clear();
+
+                const int menuWidth = 26;
+                Console.WriteLine($"╔{new string('═', menuWidth - 2)}╗");
+                Console.WriteLine($"|{"Ustawienia".PadLeft((menuWidth + "Ustawienia".Length) / 2).PadRight(menuWidth - 2)}|"); // Wysrodkowany tytul
+                Console.WriteLine($"╠{new string('═', menuWidth - 2)}╣");
+
+                string[] options =
+                {
+                    "Dźwięk: Włączony",
+                    "Wygląd: Klasyczny",
+                    "Powrót"
+                };
+
+                for (int i = 0; i < options.Length; i++)
+                {
+                    Console.Write("║ ");
+                    if (i == selectedOption)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($">> {options[i].PadRight(menuWidth - 6)}║");
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+                        Console.WriteLine($"   {options[i].PadRight(menuWidth - 6)}║");
+                    }
+                }
+                Console.WriteLine($"║{new string(' ', menuWidth - 2)}║");
+                Console.WriteLine($"╚{new string('═', menuWidth - 2)}╝");
+
+                var key = Console.ReadKey(true);
+
+                switch (key.Key)
+                {
+                    case ConsoleKey.UpArrow:
+                        selectedOption = Math.Max(0, selectedOption - 1);
+                        break;
+                    case ConsoleKey.DownArrow:
+                        selectedOption = Math.Min(options.Length - 1, selectedOption + 1);
+                        break;
+                    case ConsoleKey.Enter:
+                        if (selectedOption == options.Length - 1) // jesli wybrano Powrot
+                        {
+                            return;
+                        }
+                        break;
+                }
+            }
         }
 
 
@@ -125,6 +206,16 @@ namespace ChooseYourAdventure
             {
                 Console.WriteLine(line);
             }
+        }
+
+        static void ShowTitle()
+        {
+            Console.WriteLine(".______       __   _______   _______   __       _______      ______    _______    .______    __           ___        ______  __  ___         _______..___________.  ______   .__   __.  _______ ");
+            Console.WriteLine("|   _  \\     |  | |       \\ |       \\ |  |     |   ____|    /  __  \\  |   ____|   |   _  \\  |  |         /   \\      /      ||  |/  /        /       ||           | /  __  \\  |  \\ |  | |   ____|");
+            Console.WriteLine("|  |_)  |    |  | |  .--.  ||  .--.  ||  |     |  |__      |  |  |  | |  |__      |  |_)  | |  |        /  ^  \\    |  ,----'|  '  /        |   (----``---|  |----`|  |  |  | |   \\|  | |  |__   \r\n");
+            Console.WriteLine("|      /     |  | |  |  |  ||  |  |  ||  |     |   __|     |  |  |  | |   __|     |   _  <  |  |       /  /_\\  \\   |  |     |    <          \\   \\        |  |     |  |  |  | |  . `  | |   __|  \r\n");
+            Console.WriteLine("|  |\\  \\----.|  | |  '--'  ||  '--'  ||  `----.|  |____    |  `--'  | |  |        |  |_)  | |  `----. /  _____  \\  |  `----.|  .  \\     .----)   |       |  |     |  `--'  | |  |\\   | |  |____ \r\n");
+            Console.WriteLine("| _| `._____||__| |_______/ |_______/ |_______||_______|    \\______/  |__|        |______/  |_______|/__/     \\__\\  \\______||__|\\__\\    |_______/        |__|      \\______/  |__| \\__| |_______|\r\n");
         }
     }
 }

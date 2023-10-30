@@ -13,14 +13,14 @@ namespace ChooseYourAdventure.Model
             // tworzenie zakonczen
             Scene endingA = new Scene
             {
-                Description = "Zakończenie A: Okazuje się, że kamień był przeklęty. Przez Twoje decyzje świat pogrąża się w chaosie...",
+                Description = "Zakończenie A: Okazuje się, że kamień był przeklęty.\nPrzez Twoje decyzje świat pogrąża się w chaosie, a tajemnicza moc kamienia jest teraz nie do opanowania.",
                 Choices = new List<Choice>(), // lista bedzie pusta
                 SceneColor = ConsoleColor.Red
             };
 
             Scene endingB = new Scene
             {
-                Description = "Zakończenie B: Dzięki Twoim badaniom i decyzjom, starożytna technologia przywraca równowagę...",
+                Description = "Zakończenie B: Dzięki Twoim badaniom i decyzjom, \nstarożytna technologia przywraca równowagę środowiskową na Ziemi.\nŚwiat odnawia się i wchodzi w nową erę dobrobytu.",
                 Choices = new List<Choice>(), // lista bedzie pusta
                 SceneColor = ConsoleColor.Green
             };
@@ -28,31 +28,31 @@ namespace ChooseYourAdventure.Model
             // tworzenie scen
             Scene scene1 = new Scene
             {
-                Description = "Jesteś archeologiem i właśnie odkryłeś tajemniczy czarny kamień...",
+                Description = "Jesteś archeologiem i właśnie odkryłeś tajemniczy czarny kamień z nieznanych znaków.\nKamień ten może prowadzić do wielkiego skarbu lub przeklętej katastrofy.",
                 Choices = new List<Choice>()
             };
 
             Scene scene2 = new Scene
             {
-                Description = "Znaki na kamieniu zaczynają świecić...",
+                Description = "Znaki na kamieniu zaczynają świecić i ukazują Ci drogę do ukrytego pomieszczenia w jaskini.\nW środku jest ołtarz z miejscem na kamień.",
                 Choices = new List<Choice>()
             };
 
             Scene scene3 = new Scene
             {
-                Description = "Po wyjściu z jaskini spotykasz tajemniczą postać...",
+                Description = "Po wyjściu z jaskini spotykasz tajemniczą postać w kapturze,\nktóra proponuje Ci wielką sumę pieniędzy za kamień.",
                 Choices = new List<Choice>()
             };
 
             Scene scene4 = new Scene
             {
-                Description = "Po włożeniu kamienia ołtarz zaczyna się obracać...",
+                Description = "Po włożeniu kamienia ołtarz zaczyna się obracać, ukazując tajemne przejście.",
                 Choices = new List<Choice>()
             };
 
             Scene scene5 = new Scene
             {
-                Description = "Decydujesz się zbadanie kamienia w swoim laboratorium...",
+                Description = "Decydujesz się zbadanie kamienia w swoim laboratorium.\nPo dokładnych badaniach możesz coś odkryć.",
                 Choices = new List<Choice>()
             };
 

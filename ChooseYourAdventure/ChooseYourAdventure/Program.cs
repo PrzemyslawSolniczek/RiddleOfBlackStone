@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,9 +12,15 @@ namespace ChooseYourAdventure
     {
         // zmienna do ustawienia trybu wypisywania tekstu w scenach
         public static bool DisplayTextLetterByLetter = true;
+        // zmienna wlaczajaca muzke
+        public static bool Music = true;
+        //private static SoundPlayer player = new SoundPlayer("D:\\Studia\\Semestr V\\KCK\\Projekt\\ChooseYourAdventure\\ChooseYourAdventure\\mario_10min.wav");
+
 
         static void Main(string[] args)
         {
+            //PlayMusic();
+
             bool endOfGame = false;
             int userChoice = 0;
 
@@ -149,10 +156,11 @@ namespace ChooseYourAdventure
 
 
                 string displayMode = DisplayTextLetterByLetter ? "Wygląd: Litera po literze" : "Wygląd: Tekst od razu";
+                string music = Music ? "Dźwięk: Włączony" : "Dźwięk: Wyłączony";
 
                 string[] options =
                 {
-                    "Dźwięk: Włączony",
+                    music,
                     displayMode,
                     "Powrót"
                 };
@@ -185,13 +193,20 @@ namespace ChooseYourAdventure
                         selectedOption = Math.Min(options.Length - 1, selectedOption + 1);
                         break;
                     case ConsoleKey.Enter:
-                        if (selectedOption == options.Length - 1) // jesli wybrano Powrot
+                        switch (selectedOption)
                         {
-                            return;
-                        }
-                        else if (selectedOption == 1) // wybrano tryb wyswietlania tekstu
-                        {
-                            DisplayTextLetterByLetter = !DisplayTextLetterByLetter;
+                            case 0:
+                                // dzwiek
+                                Music = !Music;
+                                //PlayMusic();
+                                break;
+                            case 1:
+                                // wyglad
+                                DisplayTextLetterByLetter = !DisplayTextLetterByLetter;
+                                break;
+                            case 2:
+                                // Powrot
+                                return;
                         }
                         break;
                 }
@@ -199,6 +214,20 @@ namespace ChooseYourAdventure
         }
 
 
+        // MUZYKA //
+ /*
+        public static void PlayMusic()
+        {
+            if (Music)
+            {
+                player.PlayLooping();
+            }
+            else
+            {
+                player.Stop();
+            }
+        }
+ */
 
         ////// WZORKI ///////
         static void ShowStone()

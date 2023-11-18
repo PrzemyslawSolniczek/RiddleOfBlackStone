@@ -1,0 +1,76 @@
+﻿using ChooseYourAdventure.Controller;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ChooseYourAdventure.Model
+{
+    public class GameModel : IGameModel
+    {
+        private Scene _currentScene;
+        private Question _quiz;
+        private AppState _appState;
+        private bool _isLoaded;
+        private int _sum;
+        private int _choiceIndex;
+        private Enemies _skeleton;
+        private Player _player;
+        
+        public GameModel()
+        {
+            _skeleton = new Enemies
+            {
+                attack = 1,
+                live = 1
+            };
+            _player = new Player
+            {
+                Lives = 3
+            };
+            _quiz = QuizInitializer.InitializeQuiz();
+        }
+        
+        public Scene currentScene
+        {
+            get { return _currentScene; }
+            set { _currentScene = value; }
+        }
+        public Question quiz
+        {
+            get { return _quiz; }
+            set { _quiz = value; }
+        }
+        public AppState appState
+        {
+            get { return _appState; }
+            set { _appState = value; }
+        }
+        public bool isLoaded
+        {
+            get { return _isLoaded; }
+            set { _isLoaded = value; }
+        }
+        public int sum
+        {
+            get { return _sum; }
+            set { _sum = value; }
+        }
+        public int choiceIndex
+        {
+            get { return _choiceIndex; }
+            set { _choiceIndex = value; }
+        }
+        public Enemies skeleton
+        {
+            get { return _skeleton; }
+            set { _skeleton = value; }
+        }
+        public Player player
+        {
+            get { return _player; }
+            set { _player = value; }
+        }
+    }
+}

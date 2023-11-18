@@ -5,3 +5,10 @@ D:\Studia\Semestr V\KCK\Projekt\ChooseYourAdventure\ChooseYourAdventure\obj\Debu
 D:\Studia\Semestr V\KCK\Projekt\ChooseYourAdventure\ChooseYourAdventure\obj\Debug\ChooseYourAdventure.csproj.CoreCompileInputs.cache
 D:\Studia\Semestr V\KCK\Projekt\ChooseYourAdventure\ChooseYourAdventure\obj\Debug\ChooseYourAdventure.exe
 D:\Studia\Semestr V\KCK\Projekt\ChooseYourAdventure\ChooseYourAdventure\obj\Debug\ChooseYourAdventure.pdb
+C:\Users\alber\OneDrive\Desktop\KCK\ChooseYourAdventure\ChooseYourAdventure\obj\Debug\ChooseYourAdventure.csproj.AssemblyReference.cache
+C:\Users\alber\OneDrive\Desktop\KCK\ChooseYourAdventure\ChooseYourAdventure\obj\Debug\ChooseYourAdventure.csproj.CoreCompileInputs.cache
+C:\Users\alber\OneDrive\Desktop\KCK\ChooseYourAdventure\ChooseYourAdventure\obj\Debug\ChooseYourAdventure.exe
+C:\Users\alber\OneDrive\Desktop\KCK\ChooseYourAdventure\ChooseYourAdventure\obj\Debug\ChooseYourAdventure.pdb
+C:\Users\alber\OneDrive\Desktop\KCK\ChooseYourAdventure\ChooseYourAdventure\bin\Debug\ChooseYourAdventure.exe.config
+C:\Users\alber\OneDrive\Desktop\KCK\ChooseYourAdventure\ChooseYourAdventure\bin\Debug\ChooseYourAdventure.exe
+C:\Users\alber\OneDrive\Desktop\KCK\ChooseYourAdventure\ChooseYourAdventure\bin\Debug\ChooseYourAdventure.pdb

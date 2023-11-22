@@ -10,6 +10,6 @@ namespace ChooseYourAdventure.Model
     {
         public int live { get; set; }
         public int attack { get; set; }
-        
+
     }
 }

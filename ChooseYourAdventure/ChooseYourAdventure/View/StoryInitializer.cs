@@ -36,7 +36,7 @@ namespace ChooseYourAdventure.Model
             Scene endingA = new Scene
             {
                 Description = "Zakończenie A: Okazuje się, że kamień był przeklęty.\nPrzez Twoje decyzje świat pogrąża się w chaosie, a tajemnicza moc kamienia jest teraz nie do opanowania.",
-                            AsciiArt = @"   
+                AsciiArt = @"   
               z""           ""$          $""""       *F         **e.
              z""             ""c        d""          *.           ""$.
             .F                        ""            ""            'F
@@ -112,7 +112,7 @@ namespace ChooseYourAdventure.Model
             // tworzenie scen
             Scene scene1 = new Scene
             {
-                Description = "Jesteś archeologiem i właśnie odkryłeś tajemniczy czarny kamień z nieznanych znaków.\nKamień ten może prowadzić do wielkiego skarbu lub przeklętej katastrofy.",
+                Description = "Właśnie odkryłeś tajemniczy czarny kamień z nieznanych znaków.\nKamień ten może prowadzić do wielkiego skarbu lub przeklętej katastrofy.",
                 AsciiArt = @"
                                                  ##                                                 
                                   ##+            ##            ##+                                  
@@ -172,7 +172,7 @@ namespace ChooseYourAdventure.Model
                   |- ||  |  |  | ||:::::::::::::::::::::|| |  |  |  ||= |  |--|- 
                 ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^~~~~~~~~~
 
-",          
+",
                 Choices = new List<Choice>()
             };
 
@@ -237,7 +237,7 @@ namespace ChooseYourAdventure.Model
             Scene scene5 = new Scene
             {
                 Description = "Decydujesz się zbadanie kamienia w swoim laboratorium.\nPo dokładnych badaniach możesz coś odkryć.",
-                AsciiArt= @"
+                AsciiArt = @"
 
                 __]_____]____]_____]______]_______]_____]______]______]______]___]
                              _                       _______  |||""||;;|.||##||=|||

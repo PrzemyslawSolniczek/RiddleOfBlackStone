@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -66,10 +67,9 @@ namespace ChooseYourAdventure.View
         public void DisplayScene(IGameModel emp, IMenuModel mn)
         {
 
-            emp.sum++; 
+            emp.sum++;
             if (emp.sum == 2)
             {
-                //PrintingAscii.DrawCave();
                 PrintingAscii.DrawSkeleton();
                 emp.skeleton.attack = 1;
                 emp.skeleton.live = 1;
@@ -79,7 +79,6 @@ namespace ChooseYourAdventure.View
                 Question question = new Question();
                 var choice = questionGetChoice(emp, r);
                 question = emp.quiz[r];
-                //aTimer.Start();
                 if (question.Answers[choice].correctAnswer)
                 {
                     Console.Clear();
@@ -100,11 +99,11 @@ namespace ChooseYourAdventure.View
                     Thread.Sleep(2000);
                     emp.player.Lives = 3;
                     emp.sum = 0;
-                    emp.currentScene = StoryInitializer.InitializeStory(); //TODO DO SPRAWDZENIA
+                    emp.currentScene = StoryInitializer.InitializeStory();
                     Console.ReadKey();
                 }
             }
-            if(emp.sum == 4)
+            if (emp.sum == 4)
             {
                 PrintingAscii.DrawDragon();
                 Random rnd = new Random();
@@ -132,7 +131,7 @@ namespace ChooseYourAdventure.View
                     Thread.Sleep(2000);
                     emp.player.Lives = 3;
                     emp.sum = 0;
-                    emp.currentScene = StoryInitializer.InitializeStory(); //TODO DO SPRAWDZENIA
+                    emp.currentScene = StoryInitializer.InitializeStory();
                     Console.ReadKey();
                 }
 
@@ -159,9 +158,9 @@ namespace ChooseYourAdventure.View
                 PrintingStory(emp.currentScene.Description);
             }
             Console.WriteLine(emp.currentScene.Description);
-            Console.WriteLine(); 
-;
-            
+            Console.WriteLine();
+            ;
+
             Console.ResetColor();  // resetuje kolor do domyslnego
 
             for (int i = 0; i < emp.currentScene.Choices.Count; i++)
@@ -225,8 +224,12 @@ namespace ChooseYourAdventure.View
         }
         public void StartGame(IGameModel emp, IMenuModel mn)
         {
-            emp.sum = 0;
-            emp.player.Lives = 3;
+            Console.Clear();
+            if (!emp.isLoaded)
+            {
+                PrintingAscii.LoadStory();
+                emp.sum = 0;
+            }
             while (emp.currentScene != null)
             {
                 PrintingAscii.DrawAt(105, 0, "Życia: ", ConsoleColor.DarkYellow);
@@ -250,16 +253,28 @@ namespace ChooseYourAdventure.View
         }
         public void Save(IGameModel emp)
         {
-            System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(emp.currentScene.GetType());
+            AppState appState = new AppState
+            {
+                Scene = emp.currentScene,
+                Lives = emp.player.Lives,
+                sum = emp.sum
+            };
+            System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(appState.GetType());
             string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             using (StreamWriter output = new StreamWriter(Path.Combine(docPath, "save.xml")))
             {
-                x.Serialize(output, emp.currentScene);
+                x.Serialize(output, appState);
             }
         }
         public Scene Load(IGameModel emp)
         {
-            System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(emp.currentScene.GetType());
+            AppState appState = new AppState
+            {
+                Scene = emp.currentScene,
+                Lives = emp.player.Lives,
+                sum = emp.sum
+            };
+            System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(appState.GetType());
             emp.isLoaded = true;
             string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string filePath = Path.Combine(docPath, "save.xml");
@@ -267,8 +282,10 @@ namespace ChooseYourAdventure.View
             {
                 using (StreamReader output = new StreamReader(filePath))
                 {
-                    var loadedScene = x.Deserialize(output);
-                    emp.currentScene = (Scene)loadedScene;
+                    var loadedScene = (AppState)x.Deserialize(output);
+                    emp.currentScene = loadedScene.Scene;
+                    emp.player.Lives = loadedScene.Lives;
+                    emp.sum = loadedScene.sum;
                 }
             }
             return emp.currentScene;
@@ -278,9 +295,9 @@ namespace ChooseYourAdventure.View
             Console.Clear();
             PrintingAscii.DrawAt(105, 0, "Życia: ", ConsoleColor.DarkYellow);
             PrintingAscii.DrawLineAtH(113, 0, (emp.player.Lives).ToString().Length, emp.player.Lives, ConsoleColor.DarkYellow);
-            if(emp.sum == 2)
+            if (emp.sum == 2)
                 PrintingAscii.DrawSkeleton();
-            else if(emp.sum == 4)
+            else if (emp.sum == 4)
                 PrintingAscii.DrawDragon();
             Console.WriteLine("\n\n");
             Question question = new Question();

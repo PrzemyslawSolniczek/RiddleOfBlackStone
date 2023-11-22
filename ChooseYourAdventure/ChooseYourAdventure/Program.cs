@@ -25,8 +25,8 @@ namespace ChooseYourAdventure
             gameModel.currentScene = StoryInitializer.InitializeStory();
             menuModel.Path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Sound\WelcomeScreen.wav";
             menuModel.SoundPlayer.SoundLocation = menuModel.Path;
-            menuModel.SoundPlayer.Play();
-            //PrintingAscii.WelcomeScreen();
+            menuModel.SoundPlayer.PlayLooping();
+            PrintingAscii.WelcomeScreen();
             Console.Clear();
             Thread.Sleep(2000);
             while (!menuModel.EndOfGame)

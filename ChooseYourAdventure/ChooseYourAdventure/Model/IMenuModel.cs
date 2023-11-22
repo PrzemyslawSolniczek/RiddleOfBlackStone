@@ -13,7 +13,7 @@ namespace ChooseYourAdventure.Model
     {
         bool DisplayTextLetterByLetter { get; set; }
         bool Music { get; set; }
-        string Path  { get; set; } 
+        string Path { get; set; }
         bool Check { get; set; }
         bool Loaded { get; set; }
         string LoadGame { get; set; }

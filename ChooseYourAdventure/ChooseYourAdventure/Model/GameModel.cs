@@ -38,9 +38,15 @@ namespace ChooseYourAdventure.Model
             };
             _quiz = QuizInitializer.InitializeQuiz();
             _random = new Random();
-            _r = _random.Next(_quiz.Count); //Nie wiem czy tak zadziała
+            _r = _random.Next(_quiz.Count);
+            _appState = new AppState
+            {
+                Scene = _currentScene,
+                Lives = _player.Lives
+            };
+
         }
-        
+
         public Scene currentScene
         {
             get { return _currentScene; }
@@ -78,7 +84,7 @@ namespace ChooseYourAdventure.Model
         }
         public Enemies dragon
         {
-            get { return _dragon;  }
+            get { return _dragon; }
             set { _dragon = value; }
         }
         public Player player

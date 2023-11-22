@@ -13,7 +13,7 @@ namespace ChooseYourAdventure.Controller
     {
         private IMenuView menuView;
         private IMenuModel menuModel;
-        public MenuController(IMenuView _menuView, IMenuModel _menuModel) 
+        public MenuController(IMenuView _menuView, IMenuModel _menuModel)
         {
             menuView = _menuView;
             menuModel = _menuModel;
@@ -24,7 +24,7 @@ namespace ChooseYourAdventure.Controller
         }
         public void NewGame(GameController gameController)
         {
-            menuView.NewGame(gameController, menuModel); //do sprawdzenia
+            menuView.NewGame(gameController, menuModel);
         }
         public void LoadGame(GameController gameController)
         {

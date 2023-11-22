@@ -11,8 +11,8 @@ namespace ChooseYourAdventure.Controller
     [Serializable]
     public class AppState
     {
-        public Scene scene { get; set; }
-        public Choice choice { get; set; }
-        public Player player { get; set; }
+        public Scene Scene { get; set; }
+        public int Lives { get; set; }
+        public int sum { get; set; }
     }
 }

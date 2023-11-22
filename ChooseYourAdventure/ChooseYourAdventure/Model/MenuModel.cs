@@ -57,13 +57,6 @@ namespace ChooseYourAdventure.Model
             get { return _check; }
             set { _check = value; }
         }
-        /*
-        public Scene CurrentScene
-        {
-            get { return _currentScene; }
-            set { _currentScene = value; }
-        }
-        */
         public string Path
         {
             get { return _path; }

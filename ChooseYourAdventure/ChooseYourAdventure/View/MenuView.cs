@@ -6,6 +6,7 @@ using System.Linq;
 using System.Media;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ChooseYourAdventure.View
@@ -14,7 +15,8 @@ namespace ChooseYourAdventure.View
     {
         public void ShowMenu(IMenuModel mn)
         {
-
+            PrintingAscii.WelcomeScreen();
+            Thread.Sleep(200);
             if (mn.Check == false)
             {
                 PrintingAscii.FirstScreen(); //w celach debugowania programu lepiej to zakomentować, aby za każdym razem się nie ładowało:P

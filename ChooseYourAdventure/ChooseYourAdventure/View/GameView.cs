@@ -1,4 +1,5 @@
-﻿using ChooseYourAdventure.Model;
+﻿using ChooseYourAdventure.Controller;
+using ChooseYourAdventure.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -37,21 +38,24 @@ namespace ChooseYourAdventure.View
 
             Console.WriteLine();
         }
-        public int questionGetChoice(IGameModel emp)
+        public int questionGetChoice(IGameModel emp, int r)
         {
+            Random rnd = new Random();
+            Question question = new Question();
             int choiceIndex = 0;  // opcja wybrana w danym momencie
             int i = 15;
             while (true)  // nieskonczona petla do momentu dokonania wyboru
             {
-                questionView(choiceIndex, emp);
+                questionView(choiceIndex, emp, r);
+                question = emp.quiz[r];
                 var key = Console.ReadKey(true);
                 switch (key.Key)
                 {
                     case ConsoleKey.UpArrow:
-                        choiceIndex = (choiceIndex - 1 + emp.quiz.Answers.Count) % emp.quiz.Answers.Count;
+                        choiceIndex = (choiceIndex - 1 + question.Answers.Count) % question.Answers.Count;
                         break;
                     case ConsoleKey.DownArrow:
-                        choiceIndex = (choiceIndex + 1) % emp.quiz.Answers.Count;
+                        choiceIndex = (choiceIndex + 1) % question.Answers.Count;
                         break;
                     case ConsoleKey.Enter:
                         return choiceIndex;  // wyswietl wybrany tekst
@@ -59,31 +63,79 @@ namespace ChooseYourAdventure.View
 
             }
         }
-        public void DisplayScene(IGameModel emp)
+        public void DisplayScene(IGameModel emp, IMenuModel mn)
         {
-            emp.sum++;
+
+            emp.sum++; 
             if (emp.sum == 2)
             {
-                PrintingAscii.DrawCave();
+                //PrintingAscii.DrawCave();
                 PrintingAscii.DrawSkeleton();
                 emp.skeleton.attack = 1;
                 emp.skeleton.live = 1;
-                //System.Timers.Timer aTimer = new System.Timers.Timer();
-                //aTimer.Elapsed += new System.Timers.ElapsedEventHandler(skeletonAttack);
-                //aTimer.Interval = 500000;
                 int i;
-                var choice = questionGetChoice(emp);
+                Random rnd = new Random();
+                int r = rnd.Next(emp.quiz.Count);
+                Question question = new Question();
+                var choice = questionGetChoice(emp, r);
+                question = emp.quiz[r];
                 //aTimer.Start();
-                if (emp.quiz.Answers[choice].correctAnswer)
+                if (question.Answers[choice].correctAnswer)
                 {
-                    //  aTimer.Dispose();
-                    Console.WriteLine("Udało ci się");
+                    Console.Clear();
+                    PrintingAscii.CorrectAnswer();
+                    Console.ReadKey();
                 }
                 else
                 {
+                    Console.Clear();
+                    PrintingAscii.IncorrectAnswer();
+                    Console.ReadKey();
                     emp.player.Lives -= emp.skeleton.attack;
                 }
-                //Thread.Sleep(2000);
+                if (emp.player.Lives == 0)
+                {
+                    Console.Clear();
+                    PrintingAscii.GameOver();
+                    Thread.Sleep(2000);
+                    emp.player.Lives = 3;
+                    emp.sum = 0;
+                    emp.currentScene = StoryInitializer.InitializeStory(); //TODO DO SPRAWDZENIA
+                    Console.ReadKey();
+                }
+            }
+            if(emp.sum == 4)
+            {
+                PrintingAscii.DrawDragon();
+                Random rnd = new Random();
+                int r = rnd.Next(emp.quiz.Count);
+                Question question = new Question();
+                var choice = questionGetChoice(emp, r);
+                question = emp.quiz[r];
+                if (question.Answers[choice].correctAnswer)
+                {
+                    Console.Clear();
+                    PrintingAscii.CorrectAnswer();
+                    Console.ReadKey();
+                }
+                else
+                {
+                    Console.Clear();
+                    PrintingAscii.IncorrectAnswer();
+                    Console.ReadKey();
+                    emp.player.Lives -= emp.dragon.attack;
+                }
+                if (emp.player.Lives == 0)
+                {
+                    Console.Clear();
+                    PrintingAscii.GameOver();
+                    Thread.Sleep(2000);
+                    emp.player.Lives = 3;
+                    emp.sum = 0;
+                    emp.currentScene = StoryInitializer.InitializeStory(); //TODO DO SPRAWDZENIA
+                    Console.ReadKey();
+                }
+
             }
             Console.Clear();
             if (emp.isLoaded)
@@ -98,31 +150,20 @@ namespace ChooseYourAdventure.View
             {
                 Console.WriteLine(emp.currentScene.AsciiArt);
             }
-            /*
-            if (isScene1)
-            {
-                PrintingAscii.DrawStone();
-                isScene1 = false;
-            }
-            else
-            {
-                Console.Clear();
-            }
-            */
-            //Console.SetCursorPosition(0, 29);
             if (emp.currentScene.SceneColor.HasValue)  // sprawdz, czy ustawiono kolor dla sceny
             {
                 Console.ForegroundColor = emp.currentScene.SceneColor.Value;
             }
-            PrintingStory(emp.currentScene.Description);
+            if (mn.DisplayTextLetterByLetter)
+            {
+                PrintingStory(emp.currentScene.Description);
+            }
+            Console.WriteLine(emp.currentScene.Description);
             Console.WriteLine(); 
-
+;
             
             Console.ResetColor();  // resetuje kolor do domyslnego
 
-            // jezeli scena posiada ASCII art, wyswietla go
-
-            // wyswietla dostepne wybory
             for (int i = 0; i < emp.currentScene.Choices.Count; i++)
             {
                 Console.WriteLine($"{i + 1}. {emp.currentScene.Choices[i].Description}");
@@ -182,14 +223,15 @@ namespace ChooseYourAdventure.View
                 }
             }
         }
-        public void StartGame(IGameModel emp)
+        public void StartGame(IGameModel emp, IMenuModel mn)
         {
-            //string lives = string.Format("Życia: {0}", emp.player.Lives).PadLeft(3, '0');
+            emp.sum = 0;
+            emp.player.Lives = 3;
             while (emp.currentScene != null)
             {
                 PrintingAscii.DrawAt(105, 0, "Życia: ", ConsoleColor.DarkYellow);
                 PrintingAscii.DrawLineAtH(113, 0, (emp.player.Lives).ToString().Length, emp.player.Lives, ConsoleColor.DarkYellow);
-                DisplayScene(emp); // wyswietla opis aktualnej sceny oraz dostepne wybory
+                DisplayScene(emp, mn); // wyswietla opis aktualnej sceny oraz dostepne wybory
 
                 // jezeli jestesmy w scenie koncowej (brak dostepnych wyborow)
                 if (emp.currentScene.Choices.Count == 0)
@@ -231,25 +273,31 @@ namespace ChooseYourAdventure.View
             }
             return emp.currentScene;
         }
-        public void questionView(int choiceIndex, IGameModel emp)
+        public void questionView(int choiceIndex, IGameModel emp, int random)
         {
             Console.Clear();
             PrintingAscii.DrawAt(105, 0, "Życia: ", ConsoleColor.DarkYellow);
             PrintingAscii.DrawLineAtH(113, 0, (emp.player.Lives).ToString().Length, emp.player.Lives, ConsoleColor.DarkYellow);
-            PrintingAscii.DrawSkeleton();
+            if(emp.sum == 2)
+                PrintingAscii.DrawSkeleton();
+            else if(emp.sum == 4)
+                PrintingAscii.DrawDragon();
+            Console.WriteLine("\n\n");
+            Question question = new Question();
+            PrintingAscii.DrawAt(1, 15, "UWAGA: " + emp.quiz[random].Description, ConsoleColor.DarkYellow);
             Console.WriteLine("\n");
-            Console.WriteLine("UWAGA PYTANIE " + emp.quiz.Description);
-            for (int i = 0; i < emp.quiz.Answers.Count; i++)
+            question = emp.quiz[random];
+            for (int i = 0; i < question.Answers.Count; i++)
             {
                 if (i == choiceIndex)  // jezeli to aktualnie wybrana opcja
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine($">> {emp.quiz.Answers[i].Description}");
+                    Console.WriteLine($">> {question.Answers[i].Description}");
                     Console.ResetColor();
                 }
                 else
                 {
-                    Console.WriteLine(emp.quiz.Answers[i].Description);
+                    Console.WriteLine(question.Answers[i].Description);
                 }
             }
         }

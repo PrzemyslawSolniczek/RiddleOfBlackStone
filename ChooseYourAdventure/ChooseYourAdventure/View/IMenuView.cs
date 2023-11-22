@@ -12,10 +12,8 @@ namespace ChooseYourAdventure.View
     public interface IMenuView
     {
         void ShowMenu(IMenuModel mnu);
-        void NewGame(GameController gameController);
-        //Savy działają w ten sposób, że po prostu przy każdym wyjściu z gry, klikasz "wczytaj gre" i jak dasz "nowa gra" to ci się
-        //załaduje stary save
-        void LoadGame(GameController gameController);
+        void NewGame(GameController gameController, IMenuModel mn);
+        void LoadGame(GameController gameController, IMenuModel mn);
         void About();
         void OptionsPanel(IMenuModel mn);
         void PlayMusic(SoundPlayer player, IMenuModel mn);

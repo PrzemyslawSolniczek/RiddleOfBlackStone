@@ -18,10 +18,12 @@ namespace ChooseYourAdventure.Controller
     {
         private IGameModel gameModel;
         private IGameView gameView;
-        public GameController(IGameModel _gameModel, IGameView _gameView)
+        private IMenuModel menuModel;
+        public GameController(IGameModel _gameModel, IGameView _gameView, IMenuModel _menuModel)
         {
             gameModel = _gameModel;
             gameView = _gameView;
+            menuModel = _menuModel;
         }
         public void PrintingStory()
         {
@@ -29,7 +31,7 @@ namespace ChooseYourAdventure.Controller
         }
         public void StartGame()
         {
-            gameView.StartGame(gameModel);
+            gameView.StartGame(gameModel, menuModel);
         }
         public void Save()
         {
@@ -41,11 +43,11 @@ namespace ChooseYourAdventure.Controller
         }
         public void questionView()
         {
-            gameView.questionView(gameModel.choiceIndex, gameModel);
+            gameView.questionView(gameModel.choiceIndex, gameModel, gameModel.r);
         }
         public void DisplayScene()
         {
-            gameView.DisplayScene(gameModel);
+            gameView.DisplayScene(gameModel, menuModel);
         }
 
         public int GetPlayerChoice()
@@ -54,7 +56,7 @@ namespace ChooseYourAdventure.Controller
         }
         public int questionGetChoice()
         {
-            return gameView.questionGetChoice(gameModel);
+            return gameView.questionGetChoice(gameModel, gameModel.r);
         }
         public void DisplayChoicesWithHighlight()
         {

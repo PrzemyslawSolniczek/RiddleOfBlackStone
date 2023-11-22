@@ -32,7 +32,7 @@ namespace ChooseYourAdventure
             while (!menuModel.EndOfGame)
             {
                 gameModel.currentScene = StoryInitializer.InitializeStory();
-                GameController gameController = new GameController(gameModel, gameView);
+                GameController gameController = new GameController(gameModel, gameView, menuModel);
                 menuController.ShowMenu();
 
                 var key = Console.ReadKey(true);

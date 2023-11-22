@@ -15,6 +15,8 @@ namespace ChooseYourAdventure.Model
         bool Music { get; set; }
         string Path  { get; set; } 
         bool Check { get; set; }
+        bool Loaded { get; set; }
+        string LoadGame { get; set; }
         SoundPlayer SoundPlayer { get; set; }
         AppState AppState { get; set; }
         bool EndOfGame { get; set; }

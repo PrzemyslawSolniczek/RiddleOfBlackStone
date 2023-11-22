@@ -24,11 +24,11 @@ namespace ChooseYourAdventure.Controller
         }
         public void NewGame(GameController gameController)
         {
-            menuView.NewGame(gameController); //do sprawdzenia
+            menuView.NewGame(gameController, menuModel); //do sprawdzenia
         }
         public void LoadGame(GameController gameController)
         {
-            menuView.LoadGame(gameController);
+            menuView.LoadGame(gameController, menuModel);
         }
         public void About()
         {

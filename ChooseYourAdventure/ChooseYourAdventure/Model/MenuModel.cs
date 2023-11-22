@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Media;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,17 +20,32 @@ namespace ChooseYourAdventure.Model
         private AppState _appState;
         private bool _endOfGame;
         private int _userChoice;
+        private bool _loaded;
+        private string _loadGame;
         public MenuModel()
         {
             _soundPlayer = new SoundPlayer();
             _appState = new AppState();
             _endOfGame = false;
             _userChoice = 0;
+            _music = true;
+            _loaded = false;
+            _loadGame = "Wczytaj grę";
+        }
+        public string LoadGame
+        {
+            get { return _loadGame; }
+            set { _loadGame = value; }
         }
         public bool DisplayTextLetterByLetter
         {
             get { return _displaytextletterbyletter; }
             set { _displaytextletterbyletter = value; }
+        }
+        public bool Loaded
+        {
+            get { return _loaded; }
+            set { _loaded = value; }
         }
         public bool Music
         {

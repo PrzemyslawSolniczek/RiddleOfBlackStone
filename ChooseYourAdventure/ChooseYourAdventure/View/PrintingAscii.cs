@@ -47,7 +47,6 @@ namespace ChooseYourAdventure.Model
                 x++;
             }
         }
-        //Zrobić wypisywanie lini wokół konsoli, aby była wokół jakaś kolorowa obramówka, jak to czytasz, to daj feedback czy ci to pasuje:P
         public static void DrawLineByLine(int x, int y, ConsoleColor consoleColor)
         {
 
@@ -121,6 +120,54 @@ namespace ChooseYourAdventure.Model
                 }
             }
         }
+        public static void IncorrectAnswer()
+        {
+            DrawAt(22, 1, "| __ )| | ___  __| |_ __   __ _                     ", ConsoleColor.Red);
+            DrawAt(22, 2, "|  _ \\|/// _ \\/ _` | '_ \\ / _` |                    ", ConsoleColor.Red);
+            DrawAt(22, 3, "| |_) //|  __/ (_| | | | | (_| |                    ", ConsoleColor.Red);
+            DrawAt(22, 4, "|____/|_|\\___|\\__,_|_| |_|\\__,_|                    ", ConsoleColor.Red);
+            DrawAt(22, 5, "           (_(                   _          _   _ _ ", ConsoleColor.Red);
+            DrawAt(22, 6, "  ___   __| |_ __   _____      _(_) ___  __| |_/_/ |", ConsoleColor.Red);
+            DrawAt(22, 7, " / _ \\ / _` | '_ \\ / _ \\ \\ /\\ / / |/ _ \\/ _` |_  / |", ConsoleColor.Red);
+            DrawAt(22, 8, "| (_) | (_| | |_) | (_) \\ V  V /| |  __/ (_| |/ /|_|", ConsoleColor.Red);
+            DrawAt(22, 9, " \\___/ \\__,_| .__/ \\___/ \\_/\\_/ |_|\\___|\\__,_/___(_)", ConsoleColor.Red);
+            DrawAt(22, 10, "            |_|                                     ", ConsoleColor.Red);
+            DrawStringCharByChar(22, 11, @"Otrzymujesz uderzenie od przeciwnika", 1, false, ConsoleColor.DarkGray);
+        }
+
+        public static void CorrectAnswer()
+        {
+            DrawAt(22, 1, @" ____                     _     _ _                    ", ConsoleColor.Green);
+            DrawAt(22, 2, @"|  _ \ _ __ __ ___      _(_) __| | | _____      ____ _ ", ConsoleColor.Green);
+            DrawAt(22, 3, @"| |_) | '__/ _` \ \ /\ / / |/ _` |/// _ \ \ /\ / / _` |", ConsoleColor.Green);
+            DrawAt(22, 4, @"|  __/| | | (_| |\ V  V /| | (_| //| (_) \ V  V / (_| |", ConsoleColor.Green);
+            DrawAt(22, 5, @"|_|   |_|  \__,_| \_/\_/ |_|\__,_|_|\___/ \_/\_/_\__,_|", ConsoleColor.Green);
+            DrawAt(22, 6, @"  ___   __| |_ __   _____      _(_) ___  __| |_/_/        ", ConsoleColor.Green);
+            DrawAt(22, 7, @" / _ \ / _` | '_ \ / _ \ \ /\ / / |/ _ \/ _` |_  / ", ConsoleColor.Green);
+            DrawAt(22, 8, @"| (_) | (_| | |_) | (_) \ V  V /| |  __/ (_| |/ /    ", ConsoleColor.Green);
+            DrawAt(22, 9, @" \___/ \__,_| .__/ \___/ \_/\_/ |_|\___|\__,_/___|  ", ConsoleColor.Green);
+            DrawAt(22, 10, @"           |_|                   ", ConsoleColor.Green);
+
+        }
+        public static void GameOver()
+        {
+            DrawAt(22, 1, "+=========================================================+", ConsoleColor.Red);
+            DrawAt(22, 2, "|                                                         |", ConsoleColor.Red);
+            DrawAt(22, 3, "|                                                         |", ConsoleColor.Red);
+            DrawAt(22, 4, "|                                                         |", ConsoleColor.Red);
+            DrawAt(22, 5, "|  ____    _    __  __ _____    _____     _______ ____  _ |", ConsoleColor.Red);
+            DrawAt(22, 6, "| / ___|  / \\  |  \\/  | ____|  / _ \\ \\   / / ____|  _ \\| ||", ConsoleColor.Red);
+            DrawAt(22, 7, "|| |  _  / _ \\ | |\\/| |  _|   | | | \\ \\ / /|  _| | |_) | ||", ConsoleColor.Red);
+            DrawAt(22, 8, "|| |_| |/ ___ \\| |  | | |___  | |_| |\\ V / | |___|  _ <|_||", ConsoleColor.Red);
+            DrawAt(22, 9, "| \\____/_/   \\_\\_|  |_|_____|  \\___/  \\_/  |_____|_| \\_(_)|", ConsoleColor.Red);
+            DrawAt(22, 10, "|                                                         |", ConsoleColor.Red);
+            DrawAt(22, 11, "|                                                         |", ConsoleColor.Red);
+            DrawAt(22, 12, "|                                                         |", ConsoleColor.Red);
+            DrawAt(22, 13, "+=========================================================+", ConsoleColor.Red);
+            DrawStringCharByChar(22, 25, @"Gra rozpocznie się od nowa", 10, false, ConsoleColor.Red);
+
+
+        }
         public static void DrawCave()
         {
             DrawAt(22, 2, @"|.'.'',                                 ,''.'.|", ConsoleColor.Yellow);
@@ -160,6 +207,21 @@ namespace ChooseYourAdventure.Model
             DrawAt(22, 12, @"    || ||", ConsoleColor.Yellow);
             DrawAt(22, 13, @"    || ||", ConsoleColor.Yellow);
             DrawAt(22, 14, @"   ==' '==", ConsoleColor.Yellow);
+        }
+        public static void DrawDragon()
+        {
+            DrawAt(22, 1,@"       ,     \\    /      ,        ");
+            DrawAt(22, 2,@"      / \\    )\\__/(     / \\       ");
+            DrawAt(22, 3,@"     /   \\  (_\\  /_)   /   \\      ");
+            DrawAt(22, 4,@"____/_____\\__\\@  @/___/_____\\____ ");
+            DrawAt(22, 5,@"|             |\\../|              |");
+            DrawAt(22, 6,@"|              \\VV/               |");
+            DrawAt(22, 7,@"|        ----------------         |");
+            DrawAt(22, 8,@"|_________________________________|");
+            DrawAt(22, 9,@" |    /\\ /      \\\\       \\ /\\    | ");
+            DrawAt(22, 10,@" |  /   V        ))       V   \\  | ");
+            DrawAt(22, 11,@" |/     `       //        '     \\| ");
+            DrawAt(22, 12,@" `              V                ' ");
         }
 
         public static void DrawStone()
@@ -467,6 +529,7 @@ namespace ChooseYourAdventure.Model
         }
         public static void Title()
         {
+            Console.Clear();
             DrawAt(1, 2, @"                     .                                               +                         +          * ", ConsoleColor.Cyan);
             DrawAt(1, 3, @"                          .                    +              ,              *                     ", ConsoleColor.Cyan);
             DrawAt(1, 4, @"                    .                               .          .                         .        ", ConsoleColor.Cyan);

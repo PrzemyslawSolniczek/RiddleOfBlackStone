@@ -10,14 +10,16 @@ namespace ChooseYourAdventure.Model
     public class GameModel : IGameModel
     {
         private Scene _currentScene;
-        private Question _quiz;
+        private List<Question> _quiz;
         private AppState _appState;
         private bool _isLoaded;
         private int _sum;
         private int _choiceIndex;
         private Enemies _skeleton;
         private Player _player;
-        
+        private Random _random;
+        private int _r;
+        private Enemies _dragon;
         public GameModel()
         {
             _skeleton = new Enemies
@@ -25,11 +27,18 @@ namespace ChooseYourAdventure.Model
                 attack = 1,
                 live = 1
             };
+            _dragon = new Enemies
+            {
+                attack = 2,
+                live = 3
+            };
             _player = new Player
             {
                 Lives = 3
             };
             _quiz = QuizInitializer.InitializeQuiz();
+            _random = new Random();
+            _r = _random.Next(_quiz.Count); //Nie wiem czy tak zadziała
         }
         
         public Scene currentScene
@@ -37,7 +46,7 @@ namespace ChooseYourAdventure.Model
             get { return _currentScene; }
             set { _currentScene = value; }
         }
-        public Question quiz
+        public List<Question> quiz
         {
             get { return _quiz; }
             set { _quiz = value; }
@@ -67,10 +76,16 @@ namespace ChooseYourAdventure.Model
             get { return _skeleton; }
             set { _skeleton = value; }
         }
+        public Enemies dragon
+        {
+            get { return _dragon;  }
+            set { _dragon = value; }
+        }
         public Player player
         {
             get { return _player; }
             set { _player = value; }
         }
+        public int r { get { return _r; } set { _r = value; } }
     }
 }

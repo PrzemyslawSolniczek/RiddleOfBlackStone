@@ -10,7 +10,6 @@ namespace ChooseYourAdventure.Model
     {
         public string Description { get; set; } // opis sceny
         public string AsciiArt { get; set; }    // grafika ASCII -> TODO, nie ma co tego zapisywać w stringu imo, po prostu można to przekazać jako typ object -> 
-        public string AsciiMenu { get; set; }
         public List<Choice> Choices { get; set; } // dostepne wybory dla konkretnej sceny
         public ConsoleColor? SceneColor { get; set; } // bedzie ustawiany dla zakonczen
 

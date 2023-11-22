@@ -14,12 +14,11 @@ namespace ChooseYourAdventure.View
     {
         public void ShowMenu(IMenuModel mn)
         {
-            Console.Clear();
 
-            if (mn.Check == true)
+            if (mn.Check == false)
             {
                 PrintingAscii.FirstScreen(); //w celach debugowania programu lepiej to zakomentować, aby za każdym razem się nie ładowało:P
-                mn.Check = false;
+                mn.Check = true;
             }
             PrintingAscii.Title();
             const int menuWidth = 26;
@@ -31,7 +30,7 @@ namespace ChooseYourAdventure.View
             string[] options =
             {
                 "Rozpocznij nową grę",
-                "Wczytaj grę",
+                mn.LoadGame,
                 "O autorach",
                 "Opcje",
                 "Wyjdź z gry"
@@ -55,12 +54,14 @@ namespace ChooseYourAdventure.View
             Console.WriteLine($"\t\t\t\t\t\t║{new string(' ', menuWidth - 2)}║");
             Console.WriteLine($"\t\t\t\t\t\t╚{new string('═', menuWidth - 2)}╝");
         }
-        public void NewGame(GameController gameController)
+        public void NewGame(GameController gameController, IMenuModel mn)
         {
+            mn.LoadGame = "Wczytaj grę";
             gameController.StartGame();
         }
-        public void LoadGame(GameController gameController)
+        public void LoadGame(GameController gameController, IMenuModel mn)
         {
+            mn.LoadGame = "Wczytano grę";
             gameController.Load();
         }
         public void About()
@@ -85,6 +86,7 @@ namespace ChooseYourAdventure.View
 
                 string displayMode = mn.DisplayTextLetterByLetter ? "Wygląd: Litera po literze" : "Wygląd: Tekst od razu";
                 string music = mn.Music ? "Dźwięk: Włączony" : "Dźwięk: Wyłączony";
+                
 
                 string[] options =
                 {

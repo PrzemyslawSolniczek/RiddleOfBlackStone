@@ -1,21 +1,42 @@
-﻿using System;
+﻿using ChooseYourAdventure.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChooseYourAdventure.Model
+namespace ChooseYourAdventure.View
 {
-    internal class StoryInitializer
+    public class SceneView
     {
         public static Scene InitializeStory()
         {
+            Scene GameOver = new Scene
+            {
+                Description = "",
+                AsciiArt = @"
+
++=========================================================+
+|                                                         |
+|                                                         |
+|                                                         |
+|  ____    _    __  __ _____    _____     _______ ____  _ |
+| / ___|  / \  |  \/  | ____|  / _ \ \   / / ____|  _ \| ||
+|| |  _  / _ \ | |\/| |  _|   | | | \ \ / /|  _| | |_) | ||
+|| |_| |/ ___ \| |  | | |___  | |_| |\ V / | |___|  _ <|_||
+| \____/_/   \_\_|  |_|_____|  \___/  \_/  |_____|_| \_(_)|
+|                                                         |
+|                                                         |
+|                                                         |
++=========================================================+ ",
+                Choices = new List<Choice>(),
+                SceneColor = ConsoleColor.Red
+            };
             // tworzenie zakonczen
             Scene endingA = new Scene
             {
                 Description = "Zakończenie A: Okazuje się, że kamień był przeklęty.\nPrzez Twoje decyzje świat pogrąża się w chaosie, a tajemnicza moc kamienia jest teraz nie do opanowania.",
-                            AsciiArt = @"   
+                AsciiArt = @"   
               z""           ""$          $""""       *F         **e.
              z""             ""c        d""          *.           ""$.
             .F                        ""            ""            'F
@@ -151,7 +172,7 @@ namespace ChooseYourAdventure.Model
                   |- ||  |  |  | ||:::::::::::::::::::::|| |  |  |  ||= |  |--|- 
                 ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^~~~~~~~~~
 
-",          
+",
                 Choices = new List<Choice>()
             };
 
@@ -216,7 +237,7 @@ namespace ChooseYourAdventure.Model
             Scene scene5 = new Scene
             {
                 Description = "Decydujesz się zbadanie kamienia w swoim laboratorium.\nPo dokładnych badaniach możesz coś odkryć.",
-                AsciiArt= @"
+                AsciiArt = @"
 
                 __]_____]____]_____]______]_______]_____]______]______]______]___]
                              _                       _______  |||""||;;|.||##||=|||
@@ -261,7 +282,6 @@ namespace ChooseYourAdventure.Model
 
             scene5.Choices.Add(new Choice { Description = "Wykorzystać technologię", NextScene = endingB }); // prowadzi do zakonczenia B
             scene5.Choices.Add(new Choice { Description = "Ukryć kamień", NextScene = endingA }); // prowadzi do zakonczenia A
-
             return scene1; // inicjalizujemy pierwsza scene
         }
     }
